@@ -22,3 +22,11 @@ class MaterialPDF(models.Model):
 
     def __str__(self):
         return self.titulo
+
+
+
+class Testemunhos(models.Model):
+    nome = models.CharField(max_length=100)
+    texto_sobre = models.CharField(max_length=100)
+    descricao = models.TextField()
+    imagem = models.ImageField(upload_to='testemunhos/')
