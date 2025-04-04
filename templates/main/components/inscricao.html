@@ -1,0 +1,76 @@
+{% load static %}
+<section id="inscricao" class="contact-form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="contact-info">
+                    <img src="{% static 'img/logo-white.png' %}" alt="Logo" class="footer-logo">
+                    <h3 class="contact-title">Fale Inglês desde o 1º dia</h3>
+                    <p class="contact-subtitle">Aulas on-line e presenciais</p>
+
+                    <a href="https://wa.me/5519992899996" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Entre agora para a Class
+                    </a>
+
+                    <div class="features-footer">
+                        <div class="feature-footer">
+                            <img src="{% static 'img/icon-clock.png' %}" alt="Clock" class="feature-icon-small">
+                            <p>Estude no seu ritmo e horário</p>
+                        </div>
+
+                        <div class="feature-footer">
+                            <img src="{% static 'img/icon-anywhere.png' %}" alt="Anywhere" class="feature-icon-small">
+                            <p>Aprenda de onde quiser</p>
+                        </div>
+
+                        <div class="feature-footer">
+                            <img src="{% static 'img/icon-platform.png' %}" alt="Platform" class="feature-icon-small">
+                            <p>Tenha acesso a diversas <span class="text-bold">recursos</span> e <span class="text-bold">plataformas online</span></p>
+                        </div>
+                    </div>
+
+                    <div class="social-footer">
+                        <p>Siga nosso instagram:</p>
+                        <a href="https://instagram.com/thainasclassroom" class="social-link">
+                            <i class="fab fa-instagram"></i> @thainasclassroom
+                        </a>
+                    </div>
+
+                    <div class="whatsapp-footer">
+                        <a href="https://wa.me/5519992899996" class="whatsapp-link">
+                            <i class="fab fa-whatsapp"></i> (19) 9.9289-9996
+                        </a>
+                    </div>
+
+                    <div class="address-footer">
+                        <p>R. das Tulipas, 143 - Cidade Jardim I, Americana - SP</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-container">
+                    <h3 class="form-title">Quer ganhar um e-book exclusivo <br>e impulsionar seu Inglês?</h3>
+                    <p class="form-subtitle">Preencha o formulário!</p>
+
+                    <form id="contact-form" method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Digite seu nome" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="E-mail" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="tel" class="form-control" placeholder="Telefone" required>
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" placeholder="Deixe sua mensagem" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn-dark">Enviar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

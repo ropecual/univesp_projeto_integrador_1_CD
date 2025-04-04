@@ -1,0 +1,57 @@
+<!-- templates/main/materiais.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Seus Materiais Exclusivos{% endblock %}
+
+{% block header_title %}Parabéns! Aqui estão seus materiais exclusivos{% endblock %}
+
+{% block header_content %}
+    <p class="lead">Agora você tem acesso aos nossos conteúdos premium. Confira abaixo!</p>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="mb-4">
+                <i class="fas fa-file-pdf me-2"></i>Materiais disponíveis para download
+            </h2>
+        </div>
+    </div>
+
+    <div class="row">
+        {% for pdf in pdfs %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-header py-3">
+                    <h5 class="m-0 font-weight-bold">{{ pdf.titulo }}</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{ pdf.descricao }}</p>
+                </div>
+                <div class="card-footer bg-white border-0 pb-3">
+                    <a href="{{ pdf.arquivo.url }}" class="btn btn-primary w-100" download>
+                        <i class="fas fa-download me-2"></i>Baixar PDF
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle me-2"></i>Nenhum material disponível no momento. Por favor, volte em breve.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block footer_content %}
+    <div class="mt-2">
+        <a href="{% url 'landing_page' %}" class="text-decoration-none">
+            <i class="fas fa-home me-1"></i>Voltar à página inicial
+        </a>
+    </div>
+{% endblock %}
