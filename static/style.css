@@ -16,7 +16,6 @@ body {
 }
 
 
-
 .container {
     max-width: 1200px;
 }
@@ -139,7 +138,6 @@ body {
 }
 
 
-
 .class-on-badge {
     position: absolute;
     right: 260px;
@@ -211,9 +209,10 @@ body {
     position: relative;
 }
 
+
 .feature-item:after {
     content: '';
-    background-image: url('../img/arrow-curved.png');
+    background-image: url('{% static "img/seta_2.png" %}');
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
@@ -506,8 +505,11 @@ body {
 }
 
 .footer-logo {
-    height: 50px;
+    height: 80px;
     margin-bottom: 20px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 100px;
 }
 
 .contact-title {

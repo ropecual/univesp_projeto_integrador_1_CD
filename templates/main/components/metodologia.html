@@ -1,24 +1,48 @@
 {% load static %}
+{% block extra_css %}
+
+<style>
+
+    .feature-item:after {
+        content: '';
+        background-image: url('{% static "img/seta_2.png" %}');
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: absolute;
+        width: 100px;
+        height: 60px;
+        top: 20px;
+        right: -50px;
+        z-index: 1;
+    }
+
+    .feature-item:last-child:after {
+        display: none;
+    }
+</style>
+{%  endblock %}
 <section id="metodologia" class="para-quem">
     <div class="container">
         <h2 class="section-title text-center mb-4"><span class="text-muted">PARA QUEM É?</span></h2>
-        <h3 class="section-subtitle text-center mb-5">Esse curso de inglês possui aulas <span class="text-pink">personalizadas</span> para:</h3>
+        <h3 class="section-subtitle text-center mb-5">Esse curso de inglês possui aulas <span class="text-pink">personalizadas</span>
+            para:</h3>
 
         <div class="row justify-content-center">
             <div class="col-md-4 text-center feature-item">
-                <img src="{% static 'img/icon-levels.png' %}" alt="Níveis" class="feature-icon">
+                <img src="{% static 'img/nivel_ingles.png' %}" alt="Níveis" class="feature-icon">
                 <h4 class="feature-title">Todos os níveis</h4>
                 <p class="feature-text">Iniciante, Intermediário e Avançado</p>
             </div>
 
+
             <div class="col-md-4 text-center feature-item">
-                <img src="{% static 'img/icon-ages.png' %}" alt="Idades" class="feature-icon">
+                <img src="{% static 'img/Idades.png' %}" alt="Idades" class="feature-icon">
                 <h4 class="feature-title">Todas as idades</h4>
                 <p class="feature-text">Crianças, Adolescentes e Adultos</p>
             </div>
 
             <div class="col-md-4 text-center feature-item">
-                <img src="{% static 'img/icon-goals.png' %}" alt="Objetivos" class="feature-icon">
+                <img src="{% static 'img/objetivo.png' %}" alt="Objetivos" class="feature-icon">
                 <h4 class="feature-title">Todos os objetivos</h4>
                 <p class="feature-text">Conversação, Trabalho e Viagens Internacionais</p>
             </div>
@@ -32,30 +56,40 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="methodology-header">
-                        <img src="{% static 'img/logo-small.png' %}" alt="Logo" class="methodology-logo">
+                        <img src="{% static 'img/TC.png' %}" alt="Logo" class="methodology-logo">
                         <h3 class="methodology-title">METODOLOGIA</h3>
                     </div>
 
-                    <h3 class="method-title">Método <span class="text-pink">inovador</span> e <span class="text-pink">divertido</span>:</h3>
+                    <h3 class="method-title">Método <span class="text-pink">inovador</span> e <span class="text-pink">divertido</span>:
+                    </h3>
 
                     <div class="method-item">
-                        <h4 class="method-subtitle">Aprendizagem dinâmica e interativa <i class="fas fa-chevron-down method-toggle"></i></h4>
+                        <h4 class="method-subtitle">Aprendizagem dinâmica e interativa <i
+                                class="fas fa-chevron-down method-toggle"></i></h4>
                         <div class="method-content">
-                            <p>Lorem ipsum dolor sit amet. Non qui voluptas ut laborum praesentium aut reprehenderit sunt ut sequi illo qui reiciendis aut voluptas quae ea dolor omnis ut sunt voluptatem.</p>
+                            <p>Lorem ipsum dolor sit amet. Non qui voluptas ut laborum praesentium aut reprehenderit
+                                sunt ut sequi illo qui reiciendis aut voluptas quae ea dolor omnis ut sunt
+                                voluptatem.</p>
                         </div>
                     </div>
 
                     <div class="method-item">
-                        <h4 class="method-subtitle">Materiais didáticos modernos e atualizados <i class="fas fa-chevron-down method-toggle"></i></h4>
+                        <h4 class="method-subtitle">Materiais didáticos modernos e atualizados <i
+                                class="fas fa-chevron-down method-toggle"></i></h4>
                         <div class="method-content">
-                            <p>Lorem ipsum dolor sit amet. Non qui voluptas ut laborum praesentium aut reprehenderit sunt ut sequi illo qui reiciendis aut voluptas quae ea dolor omnis ut sunt voluptatem.</p>
+                            <p>Lorem ipsum dolor sit amet. Non qui voluptas ut laborum praesentium aut reprehenderit
+                                sunt ut sequi illo qui reiciendis aut voluptas quae ea dolor omnis ut sunt
+                                voluptatem.</p>
                         </div>
                     </div>
 
                     <div class="method-item">
-                        <h4 class="method-subtitle">Teacher apaixonada por ensinar <i class="fas fa-chevron-down method-toggle"></i></h4>
+                        <h4 class="method-subtitle">Teacher apaixonada por ensinar <i
+                                class="fas fa-chevron-down method-toggle"></i></h4>
                         <div class="method-content">
-                            <p>Lorem ipsum dolor sit amet. Non qui voluptas ut laborum praesentium aut reprehenderit sunt ut sequi illo qui reiciendis aut voluptas quae ea dolor omnis ut sunt voluptatem.</p>
+                            <p>Lorem ipsum dolor sit amet. Non qui voluptas ut laborum praesentium aut reprehenderit
+                                sunt ut sequi illo qui reiciendis aut voluptas quae ea dolor omnis ut sunt
+                                voluptatem.</p>
                         </div>
                     </div>
                 </div>
@@ -63,7 +97,8 @@
                 <div class="col-lg-6 d-flex align-items-center">
                     <div class="learning-english-box">
                         <h3 class="learning-title">Learning English <br>is for <span class="text-pink">you!</span></h3>
-                        <img src="{% static 'img/student-learning.png' %}" alt="Student Learning" class="learning-image">
+                        <img src="{% static 'img/foto_metodologia.jpg' %}" alt="Student Learning"
+                             class="learning-image">
                     </div>
                 </div>
             </div>
