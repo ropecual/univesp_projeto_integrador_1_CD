@@ -3,10 +3,10 @@ from datetime import date
 
 class Visitante(models.Model):
     nome = models.CharField(max_length=100)
-    idade = models.IntegerField()
+    idade = models.IntegerField(blank=True, null=True)
     email = models.EmailField()
-    cidade = models.CharField(max_length=100)
-    estado = models.CharField(max_length=2)
+    cidade = models.CharField(max_length=100, blank=True, null=True)
+    estado = models.CharField(max_length=2, blank=True, null=True)
     primeira_visita = models.DateField(default=date.today)
     ultima_visita = models.DateField(default=date.today)
 

@@ -25,7 +25,8 @@
 
                         <div class="feature-footer">
                             <img src="{% static 'img/RECURSOS.png' %}" alt="Platform" class="feature-icon-small">
-                            <p>Tenha acesso a diversas <span class="text-bold">recursos</span> e <span class="text-bold">plataformas online</span></p>
+                            <p>Tenha acesso a diversas <span class="text-bold">recursos</span> e <span
+                                    class="text-bold">plataformas online</span></p>
                         </div>
                     </div>
 
@@ -52,22 +53,21 @@
                     <h3 class="form-title">Quer ganhar um e-book exclusivo <br>e impulsionar seu Inglês?</h3>
                     <p class="form-subtitle">Preencha o formulário!</p>
 
-                    <form id="contact-form" method="post">
+                    <form id="contact-form" method="post" action="{% url 'landing_page' %}">
                         {% csrf_token %}
+                        {{ form.non_field_errors }}
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Digite seu nome" required>
+                            {{ form.nome.errors }}
+                            {{ form.nome }}
                         </div>
                         <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="E-mail" required>
+                            {{ form.email.errors }}
+                            {{ form.email }}
                         </div>
-                        <div class="mb-3">
-                            <input type="tel" class="form-control" placeholder="Telefone" required>
-                        </div>
-                        <div class="mb-3">
-                            <textarea class="form-control" placeholder="Deixe sua mensagem" rows="3"></textarea>
-                        </div>
+                        <!-- outros campos: idade, cidade, estado, etc. -->
                         <button type="submit" class="btn-dark">Enviar</button>
                     </form>
+
                 </div>
             </div>
         </div>

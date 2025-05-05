@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.http import FileResponse, Http404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import Visitante, MaterialPDF, Testemunhos
 from .forms import VisitanteForm
@@ -24,23 +25,36 @@ def landing_page(request):
 		form = VisitanteForm(request.POST)
 		if form.is_valid():
 			visitante = form.save(commit=False)
-			# Verificar se já existe um visitante com este email
-			try:
-				v_existente = Visitante.objects.get(email=visitante.email)
-				v_existente.ultima_visita = visitante.ultima_visita
-				v_existente.save()
-				messages.success(request, "Bem-vindo de volta!")
-			except Visitante.DoesNotExist:
-				visitante.save()
+			# atualizar ou criar visitante
+			v, created = Visitante.objects.update_or_create(
+				email=visitante.email,
+				defaults={
+					'nome': visitante.nome,
+					'idade': visitante.idade,
+					'cidade': visitante.cidade,
+					'estado': visitante.estado,
+					'ultima_visita': visitante.ultima_visita,
+				}
+			)
+			if created:
 				messages.success(request, "Registro realizado com sucesso!")
+			else:
+				messages.success(request, "Bem-vindo de volta!")
 
-			# Redirecionar para a página de materiais
-			return redirect('materiais')
+			# guardar email na sessão e redirecionar para download
+			request.session['cadastro_email'] = v.email
+			# supondo que queira o primeiro PDF ativo:
+			primeiro_pdf = MaterialPDF.objects.filter(ativo=True).first()
+			if primeiro_pdf:
+				return redirect('download_pdf', pk=primeiro_pdf.pk)
+			else:
+				messages.warning(request, "Nenhum material disponível.")
+				return redirect('landing_page')
+
 	else:
 		form = VisitanteForm()
 
 	testemunhos = Testemunhos.objects.all()
-
 	return render(request, 'main/landing_page.html', {
 		'form': form,
 		'testemunhos': testemunhos,
@@ -48,11 +62,15 @@ def landing_page(request):
 
 
 @require_session_email
-def materiais(request):
-	pdfs_ativos = MaterialPDF.objects.filter(ativo=True)
-	return render(request, 'main/materiais.html', {
-		'pdfs': pdfs_ativos,
-	})
+def download_pdf(request, pk):
+	pdf = get_object_or_404(MaterialPDF, pk=pk, ativo=True)
+
+	try:
+		return FileResponse(pdf.arquivo.open('rb'),
+							as_attachment=True,
+							filename=pdf.arquivo.name)
+	except IOError:
+		raise Http404("Arquivo não encontrado")
 
 
 def obrigado(request):
