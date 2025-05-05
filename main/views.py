@@ -73,5 +73,3 @@ def download_pdf(request, pk):
 		raise Http404("Arquivo não encontrado")
 
 
-def obrigado(request):
-	return render(request, 'main/obrigado.html')
