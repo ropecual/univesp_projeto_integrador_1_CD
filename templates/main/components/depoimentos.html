@@ -1,49 +1,47 @@
 {% load static %}
-<section id="depoimentos" class="testimonials">
-    <div class="container">
-        <h2 class="section-title text-center">DEPOIMENTO DE ALUNOS</h2>
-        <h3 class="section-subtitle text-center mb-5">Veja o que alguns de nossos <span class="text-pink">students</span> <br>têm a dizer sobre nossas aulas</h3>
+<section id="depoimentos" class="testimonials py-5">
+  <div class="container">
+    <h2 class="section-title text-center mb-3">DEPOIMENTO DE ALUNOS</h2>
+    <h3 class="section-subtitle text-center mb-5">
+      Veja o que alguns de nossos <span class="text-pink">students</span><br>
+      têm a dizer sobre nossas aulas
+    </h3>
 
-        <div class="testimonial-carousel">
-            <div class="testimonial-slide active">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="testimonial-card">
-                            <div class="testimonial-header">
-                                <img src="{% static 'img/beatriz.png' %}" alt="Beatriz A." class="testimonial-img">
-                                <div class="testimonial-info">
-                                    <h4 class="testimonial-name">Beatriz A.</h4>
-                                    <p class="testimonial-detail">Aluna desde 2024</p>
-                                </div>
-                            </div>
-                            <div class="testimonial-content">
-                                <p>Lorem ipsum dolor sit amet. Non qui voluptas ut laborum praesentium aut reprehenderit sunt ut sequi illo qui reiciendis aut voluptas quae ea dolor omnis ut sunt voluptatem. Non quia voluptatem qui perferendis velit. Non quia voluptatem qui perferendis velit.</p>
-                            </div>
-                        </div>
-                    </div>
+    <div class="swiper" id="swiper-depoimentos">
+      <div class="swiper-wrapper">
+        {% for t in testemunhos %}
+          {% if forloop.counter0|divisibleby:2 %}
+            <div class="swiper-slide">
+              <div class="row g-4">
+          {% endif %}
 
-                    <div class="col-lg-6">
-                        <div class="testimonial-card">
-                            <div class="testimonial-header">
-                                <img src="{% static 'img/matheus.png' %}" alt="Matheus S." class="testimonial-img">
-                                <div class="testimonial-info">
-                                    <h4 class="testimonial-name">Matheus S.</h4>
-                                    <p class="testimonial-detail">Pai de aluno</p>
-                                </div>
-                            </div>
-                            <div class="testimonial-content">
-                                <p>Lorem ipsum dolor sit amet. Non qui voluptas ut laborum praesentium aut reprehenderit sunt ut sequi illo qui reiciendis aut voluptas quae ea dolor omnis ut sunt voluptatem. Non quia voluptatem qui perferendis velit. Non quia voluptatem qui perferendis velit.</p>
-                            </div>
-                        </div>
-                    </div>
+          <div class="col-lg-6">
+            <!-- Card de Testemunho -->
+            <div class="testimonial-card p-4 border rounded shadow-sm h-100">
+              <div class="d-flex mb-3 align-items-center">
+                {% if t.imagem %}
+                  <img src="{{ t.imagem.url }}" alt="{{ t.nome }}" class="testimonial-img rounded-circle me-3">
+                {% else %}
+                  <img src="{% static 'img/default_user.png' %}" alt="{{ t.nome }}" class="testimonial-img rounded-circle me-3">
+                {% endif %}
+                <div>
+                  <h5 class="mb-1">{{ t.nome }}</h5>
+                  <small class="text-muted">{{ t.texto_sobre }}</small>
                 </div>
+              </div>
+              <p class="testimonial-content">{{ t.descricao }}</p>
             </div>
+          </div>
 
-            <!-- Botões de navegação -->
-            <div class="testimonial-nav">
-                <button class="nav-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
-                <button class="nav-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+          {% if forloop.counter0|add:"1"|divisibleby:2 or forloop.last %}
+              </div>
             </div>
-        </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <!-- Navegação Swiper -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
     </div>
+  </div>
 </section>

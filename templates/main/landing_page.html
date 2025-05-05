@@ -5,36 +5,36 @@
 {% block title %}Teacher Name - Aprenda com o método exclusivo{% endblock %}
 
 {% block navbar %}
-    {% include 'main/components/navbar.html' %}
+{% include 'main/components/navbar.html' %}
 {% endblock %}
 
 {% block header_title %}Aprenda Inglês de um jeito diferente{% endblock %}
 
 {% block header_content %}
-    <p class="lead">Um método exclusivo e eficiente para você finalmente dominar o inglês</p>
-    <a href="#inscricao" class="btn btn-lg btn-pink mt-3">Quero fazer parte da Class</a>
+<p class="lead">Um método exclusivo e eficiente para você finalmente dominar o inglês</p>
+<a href="#inscricao" class="btn btn-lg btn-pink mt-3">Quero fazer parte da Class</a>
 {% endblock %}
 
 {% block content %}
-    {% include 'main/components/hero.html' %}
-    {% include 'main/components/metodologia.html' %}
-    {% include 'main/components/sobre.html' %}
-    {% include 'main/components/depoimentos.html' %}
-    {% include 'main/components/inscricao.html' %}
+{% include 'main/components/hero.html' %}
+{% include 'main/components/metodologia.html' %}
+{% include 'main/components/sobre.html' %}
+{% include 'main/components/depoimentos.html' %}
+{% include 'main/components/inscricao.html' %}
 {% endblock %}
 
 {% block footer_content %}
-    <div class="mt-3">
-        <a href="#" class="text-decoration-none me-3"><i class="fab fa-instagram"></i></a>
-        <a href="#" class="text-decoration-none me-3"><i class="fab fa-facebook"></i></a>
-        <a href="#" class="text-decoration-none"><i class="fab fa-youtube"></i></a>
-    </div>
+<div class="mt-3">
+    <a href="#" class="text-decoration-none me-3"><i class="fab fa-instagram"></i></a>
+    <a href="#" class="text-decoration-none me-3"><i class="fab fa-facebook"></i></a>
+    <a href="#" class="text-decoration-none"><i class="fab fa-youtube"></i></a>
+</div>
 {% endblock %}
 
 {% block extra_js %}
 <script>
     // Mudar a cor da navbar quando a página é rolada
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
         const navbar = document.querySelector('.navbar');
         if (window.scrollY > 50) {
             navbar.classList.remove('navbar-transparent');
@@ -47,7 +47,7 @@
 
     // Rolagem suave para as seções ao clicar nos links do menu
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
 
             const targetId = this.getAttribute('href');
@@ -58,6 +58,18 @@
                     top: targetElement.offsetTop - 70,
                     behavior: 'smooth'
                 });
+            }
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        new Swiper('#swiper-depoimentos', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
             }
         });
     });

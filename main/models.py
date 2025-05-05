@@ -27,6 +27,6 @@ class MaterialPDF(models.Model):
 
 class Testemunhos(models.Model):
     nome = models.CharField(max_length=100)
-    texto_sobre = models.CharField(max_length=100)
+    texto_sobre = models.CharField(max_length=100, blank=True, null=True)
     descricao = models.TextField()
-    imagem = models.ImageField(upload_to='testemunhos/')
+    imagem = models.ImageField(upload_to='testemunhos/',blank=True, null=True)
