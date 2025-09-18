@@ -1,0 +1,54 @@
+{% extends 'cursos/base_cursos.html' %}
+
+{% block title %}{{ curso.titulo }} - Thainá's Classroom{% endblock %}
+
+{% block page_title %}{{ curso.titulo }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Módulos do Curso</h3>
+            </div>
+            <div class="card-body">
+                <div id="accordion">
+                    {% for modulo in curso.modulos.all %}
+                    <div class="card card-primary card-outline">
+                        <a class="d-block w-100" data-toggle="collapse" href="#collapse{{ forloop.counter }}">
+                            <div class="card-header">
+                                <h4 class="card-title w-100">
+                                    {{ modulo.titulo }}
+                                </h4>
+                            </div>
+                        </a>
+                        <div id="collapse{{ forloop.counter }}" class="collapse {% if forloop.first %}show{% endif %}" data-parent="#accordion">
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    {% for conteudo in modulo.conteudos.all %}
+                                    <li class="list-group-item">
+                                        <a href="#">
+                                            {% if conteudo.tipo == 'video' %}
+                                                <i class="fas fa-play-circle text-danger mr-2"></i>
+                                            {% elif conteudo.tipo == 'pdf' %}
+                                                <i class="fas fa-file-pdf text-info mr-2"></i>
+                                            {% endif %}
+                                            {{ conteudo.titulo }}
+                                        </a>
+                                    </li>
+                                    {% empty %}
+                                    <li class="list-group-item">Nenhum conteúdo neste módulo.</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <p>Nenhum módulo cadastrado para este curso ainda.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

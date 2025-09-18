@@ -1,0 +1,25 @@
+{% extends 'cursos/base_cursos.html' %}
+
+{% block title %}Meus Cursos - Thainá's Classroom{% endblock %}
+
+{% block page_title %}Meus Cursos{% endblock %}
+
+{% block content %}
+<div class="row">
+    {% for curso in cursos %}
+    <div class="col-md-4">
+        <div class="card card-primary card-outline">
+            <div class="card-body box-profile">
+                <h3 class="profile-username text-center">{{ curso.titulo }}</h3>
+                <p class="text-muted text-center">{{ curso.descricao|truncatewords:15 }}</p>
+                <a href="{% url 'detalhe_curso' pk=curso.pk %}" class="btn btn-primary btn-block"><b>Acessar Curso</b></a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <p class="text-center">Nenhum curso disponível no momento.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
