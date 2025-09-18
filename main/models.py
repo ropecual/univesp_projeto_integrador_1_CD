@@ -30,3 +30,8 @@ class Testemunhos(models.Model):
     texto_sobre = models.CharField(max_length=100, blank=True, null=True)
     descricao = models.TextField()
     imagem = models.ImageField(upload_to='testemunhos/',blank=True, null=True)
+
+
+# professor
+# aluno
+# classe

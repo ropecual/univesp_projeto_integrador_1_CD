@@ -20,10 +20,11 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-  path('', include('main.urls')),  # Inclui as URLs da app 'main'
-  path('admin/', admin.site.urls),
+	path('', include('main.urls')),  # Inclui as URLs da app 'main'
+	path('admin/', admin.site.urls),
+	path('cursos/', include('cursos.urls')),  # Adicione esta linha
 ]
 
 if settings.DEBUG:
-  urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-  urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+	urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+	urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
