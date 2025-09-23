@@ -52,6 +52,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'core.urls'
 
+
 TEMPLATES = [
   {
     'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -125,3 +126,12 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'lista_cursos'
+LOGOUT_REDIRECT_URL = 'landing_page'

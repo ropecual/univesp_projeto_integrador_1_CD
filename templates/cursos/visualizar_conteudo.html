@@ -1,0 +1,48 @@
+{% extends 'cursos/base_cursos.html' %}
+
+{% block title %}{{ conteudo.titulo }} - Thainá's Classroom{% endblock %}
+
+{% block page_title %}{{ conteudo.titulo }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fas fa-book-reader mr-2"></i>
+                    {{ conteudo.modulo.curso.titulo }} - {{ conteudo.modulo.titulo }}
+                </h3>
+            </div>
+            <div class="card-body">
+
+                {% if conteudo.tipo == 'video' %}
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="{{ conteudo.url_video }}" allowfullscreen></iframe>
+                    </div>
+                    <p class="mt-3"><strong>Dica:</strong> Se você cadastrar uma URL do YouTube, certifique-se de que ela está no formato "embed". Ex: <code>https://www.youtube.com/embed/CODIGO_DO_VIDEO</code></p>
+
+                {% elif conteudo.tipo == 'pdf' %}
+                    <div class="embed-responsive" style="height: 80vh;">
+                        <br><br>
+                        <embed src="{{ conteudo.arquivo_pdf.url }}" type="application/pdf" width="100%" height="100%">
+                        <p>Seu navegador não tem um plugin para PDF. Você pode <a href="{{ conteudo.arquivo_pdf.url }}">clicar aqui para baixar o PDF.</a></p>
+                    </div>
+
+                {% else %}
+                    <p>Tipo de conteúdo não suportado.</p>
+                {% endif %}
+
+            </div>
+            <div class="card-footer">
+                <br><br>
+                <a href="{% url 'cursos:detalhe_curso' pk=conteudo.modulo.curso.pk %}" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left mr-1"></i>
+                    Voltar para os módulos
+                </a>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
