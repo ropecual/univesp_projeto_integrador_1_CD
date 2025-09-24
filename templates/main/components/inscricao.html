@@ -1,73 +1,89 @@
 {% load static %}
 <section id="inscricao" class="contact-form">
     <div class="container">
-        <div class="row">
+        <div class="row align-items-center">
             <div class="col-lg-6">
                 <div class="contact-info">
-                    <img src="{% static 'img/TC.png' %}" alt="Logo" class="footer-logo">
-                    <h3 class="contact-title">Fale Inglês desde o 1º dia</h3>
+                    <h3 class="contact-title">FICOU COM ALGUMA DÚVIDA?<br>FALE COMIGO!</h3>
                     <p class="contact-subtitle">Aulas on-line e presenciais</p>
-
-                    <a href="https://wa.me/5519992899996" class="whatsapp-btn">
-                        <i class="fab fa-whatsapp"></i> Entre agora para a Class
-                    </a>
-
                     <div class="features-footer">
-                        <div class="feature-footer">
-                            <img src="{% static 'img/TEMPO.png' %}" alt="Clock" class="feature-icon-small">
-                            <p>Estude no seu ritmo e horário</p>
-                        </div>
-
-                        <div class="feature-footer">
-                            <img src="{% static 'img/aula_online.png' %}" alt="Anywhere" class="feature-icon-small">
-                            <p>Aprenda de onde quiser</p>
-                        </div>
-
-                        <div class="feature-footer">
-                            <img src="{% static 'img/RECURSOS.png' %}" alt="Platform" class="feature-icon-small">
-                            <p>Tenha acesso a diversas <span class="text-bold">recursos</span> e <span
-                                    class="text-bold">plataformas online</span></p>
-                        </div>
-                    </div>
-
-                    <p>Siga meu instagram e fale comigo:</p>
-                    <div style="display: flex; align-items: center; gap: 6px;">
-                        <i class="fab fa-instagram"></i>
-                        <a href="https://instagram.com/thainasclassroom" class="social-link">@thainasclassroom</a>
-                    </div>
-
-                    <div class="whatsapp-footer">
-                        <a href="https://wa.me/5519992899996" class="whatsapp-link">
-                            <i class="fab fa-whatsapp"></i> (19) 9.9289-9996
-                        </a>
-                    </div>
-
-                    <div class="address-footer">
-                        <p>R. das Tulipas, 143 - Cidade Jardim I, Americana - SP</p>
+                        <p>Estude no seu ritmo e horário</p>
+                        <p>Aprenda de onde quiser</p>
+                        <p>Tenha acesso a diversas <span class="text-bold">recursos</span> e <span class="text-bold">plataformas online</span></p>
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-6">
                 <div class="form-container">
-                    <h3 class="form-title">Quer ganhar um e-book exclusivo <br>e impulsionar seu Inglês?</h3>
-                    <p class="form-subtitle">Preencha o formulário!</p>
+                    <ul class="nav nav-pills nav-fill mb-4" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="pills-register-tab" data-bs-toggle="pill" data-bs-target="#pills-register" type="button" role="tab" aria-controls="pills-register" aria-selected="true">Criar Conta</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-ebook-tab" data-bs-toggle="pill" data-bs-target="#pills-ebook" type="button" role="tab" aria-controls="pills-ebook" aria-selected="false">Baixar E-book</button>
+                        </li>
+                    </ul>
 
-                    <form id="contact-form" method="post" action="{% url 'landing_page' %}">
-                        {% csrf_token %}
-                        {{ form.non_field_errors }}
-                        <div class="mb-3">
-                            {{ form.nome.errors }}
-                            {{ form.nome }}
-                        </div>
-                        <div class="mb-3">
-                            {{ form.email.errors }}
-                            {{ form.email }}
-                        </div>
-                        <!-- outros campos: idade, cidade, estado, etc. -->
-                        <button type="submit" class="btn-dark">Enviar</button>
-                    </form>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-register" role="tabpanel" aria-labelledby="pills-register-tab">
+                            <h3 class="form-title text-center">Acesse os cursos</h3>
+                            <p class="form-subtitle text-center">Crie sua conta para começar a estudar!</p>
+                            <form method="post" action="{% url 'landing_page' %}#inscricao">
+                                {% csrf_token %}
+                                <input type="hidden" name="form_type" value="register">
 
+                                {{ registration_form.non_field_errors }}
+
+                                <div class="mb-3">
+                                    {{ registration_form.first_name.errors }}
+                                    <label for="{{ registration_form.first_name.id_for_label }}">Nome Completo</label>
+                                    {{ registration_form.first_name }}
+                                </div>
+                                <div class="mb-3">
+                                    {{ registration_form.email.errors }}
+                                    <label for="{{ registration_form.email.id_for_label }}">Seu melhor e-mail</label>
+                                    {{ registration_form.email }}
+                                </div>
+                                <div class="mb-3">
+                                    {{ registration_form.password.errors }}
+                                    <label for="{{ registration_form.password.id_for_label }}">Crie uma senha</label>
+                                    {{ registration_form.password }}
+                                </div>
+                                <div class="mb-3">
+                                    {{ registration_form.password2.errors }}
+                                    <label for="{{ registration_form.password2.id_for_label }}">Confirme sua senha</label>
+                                    {{ registration_form.password2 }}
+                                </div>
+
+                                <button type="submit" class="btn btn-dark w-100">QUERO FAZER MINHA INSCRIÇÃO</button>
+                            </form>
+                        </div>
+
+                        <div class="tab-pane fade" id="pills-ebook" role="tabpanel" aria-labelledby="pills-ebook-tab">
+                            <h3 class="form-title text-center">Ganhe um e-book exclusivo</h3>
+                            <p class="form-subtitle text-center">E impulsione seu Inglês!</p>
+                            <form method="post" action="{% url 'landing_page' %}#inscricao">
+                                {% csrf_token %}
+                                <input type="hidden" name="form_type" value="ebook">
+
+                                {{ ebook_form.non_field_errors }}
+
+                                <div class="mb-3">
+                                    {{ ebook_form.nome.errors }}
+                                    <label for="{{ ebook_form.nome.id_for_label }}">Seu nome</label>
+                                    {{ ebook_form.nome }}
+                                </div>
+                                <div class="mb-3">
+                                     {{ ebook_form.email.errors }}
+                                    <label for="{{ ebook_form.email.id_for_label }}">Seu melhor e-mail</label>
+                                    {{ ebook_form.email }}
+                                </div>
+
+                                <button type="submit" class="btn btn-dark w-100">BAIXAR E-BOOK GRÁTIS</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -597,7 +597,7 @@ body {
 }
 
 .form-container {
-    background-color: white;
+    background-color: white ;
     border-radius: 20px;
     padding: 40px;
     color: var(--text-color);
@@ -607,11 +607,13 @@ body {
     font-size: 1.3rem;
     font-weight: 700;
     margin-bottom: 10px;
+    color: white !important ;
 }
 
 .form-subtitle {
     font-size: 1.1rem;
     margin-bottom: 30px;
+    color: white !important ;
 }
 
 .form-control {
@@ -745,3 +747,125 @@ body {
     animation: fadeIn 0.6s ease forwards;
 }
 
+
+/* Estilos para a nova seção de Inscrição */
+
+#inscricao.contact-form {
+    padding: 80px 0;
+    background-color: #3a2d3c; /* Cor de fundo escura, caso a imagem não carregue */
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+#inscricao .contact-info,
+#inscricao .form-container {
+    z-index: 2;
+    position: relative;
+}
+
+#inscricao::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../img/Background-Form.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.1; /* Ajuste a opacidade conforme necessário */
+    z-index: 1;
+}
+
+#inscricao .contact-info .contact-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+#inscricao .contact-info .contact-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+
+#inscricao .feature-footer {
+    background-image: url('../img/icons-inscricao.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 200px; /* Ajuste a altura conforme necessário */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-left: 60px; /* Espaço para os ícones */
+}
+
+#inscricao .feature-footer p {
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+#inscricao .form-container {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#inscricao .nav-pills .nav-link {
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin: 0 5px;
+}
+
+#inscricao .nav-pills .nav-link.active {
+    background-color: var(--pink-color);
+    color: white;
+    border-color: var(--pink-color);
+}
+
+#inscricao .form-container .form-title {
+    font-weight: 700;
+}
+
+#inscricao .form-container form p {
+    display: flex;
+    flex-direction: column;
+}
+
+#inscricao .form-container label {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+#inscricao .form-container .form-control {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 8px;
+    padding: 12px 15px;
+}
+
+#inscricao .form-container .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+#inscricao .form-container .btn-dark {
+    background-color: var(--pink-color);
+    border: none;
+    border-radius: 8px;
+    padding: 15px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+#inscricao .form-container .btn-dark:hover {
+    background-color: #ff6b8f; /* Um tom um pouco mais claro de rosa */
+    transform: translateY(-2px);
+}
