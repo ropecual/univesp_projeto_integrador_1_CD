@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/styles/overlayscrollbars.min.css" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" crossorigin="anonymous" />
     <link rel="stylesheet" href="{% static 'css/adminlte.css' %}" />
-        <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+     <link rel="stylesheet" href="{% static 'css/cursos_theme.css' %}">
 
     {% block extra_css %}{% endblock %}
 </head>
@@ -30,31 +32,30 @@
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown user-menu">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img src="{% static 'assets/img/user2-160x160.jpg' %}" class="user-image rounded-circle shadow" alt="User Image" />
-                            <span class="d-none d-md-inline">Aluno</span>
+                        <a href="#" class="nav-link dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown">
+                            Aluno
                         </a>
                         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                             <li class="user-header text-bg-primary">
-                                <img src="{% static 'assets/img/user2-160x160.jpg' %}" class="rounded-circle shadow" alt="User Image" />
+                                <img src="" class="rounded-circle shadow" alt="User Image" />
                                 <p>
-                                    Nome do Aluno
-                                    <small>Membro desde Nov. 2023</small>
+                                    {{ user.first_name|default:'Aluno' }}
+                                    <small>Membro desde {{ user.date_joined|date:"M. Y" }}</small>
                                 </p>
                             </li>
                             <li class="user-footer">
                                 <a href="#" class="btn btn-default btn-flat">Perfil</a>
-                                <a href="{% url 'landing_page' %}" class="btn btn-default btn-flat float-end">Sair</a>
+                                <a href="{% url 'logout' %}" class="btn btn-default btn-flat float-end">Sair</a>
                             </li>
                         </ul>
                     </li>
-                    </ul>
-                </div>
+                </ul>
+            </div>
         </nav>
         <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
             <div class="sidebar-brand">
                 <a href="{% url 'cursos:lista_cursos' %}" class="brand-link">
-                    <img src="{% static 'assets/img/AdminLTELogo.png' %}" alt="AdminLTE Logo" class="brand-image opacity-75 shadow" />
+                    <img src="{% static '/img/thaina.png' %}" alt="AdminLTE Logo" class="brand-image opacity-75 shadow" />
                     <span class="brand-text fw-light">Thainá's Class</span>
                 </a>
             </div>
@@ -62,18 +63,42 @@
                 <nav class="mt-2">
                     <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="navigation" data-accordion="false">
                         <li class="nav-item">
-                            <a href="{% url 'cursos:lista_cursos' %}" class="nav-link active">
-                                <i class="nav-icon bi bi-book"></i>
-                                <p>Meus Cursos</p>
+                            <a href="{% url 'cursos:lista_cursos' %}" class="nav-link">
+                                <i class="nav-icon bi bi-plus-circle-fill"></i>
+                                <p>Cursos Disponíveis</p>
                             </a>
                         </li>
+                        <li class="nav-header">MEUS CURSOS</li>
+                        {% for curso in cursos_matriculados %}
+                        <li class="nav-item">
+                            <a href="{% url 'cursos:detalhe_curso' pk=curso.pk %}" class="nav-link">
+                                <i class="nav-icon bi bi-book"></i>
+                                <p>{{ curso.titulo }}</p>
+                            </a>
+                        </li>
+                        {% empty %}
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon bi bi-emoji-frown"></i>
+                                <p>Você não está matriculado</p>
+                            </a>
+                        </li>
+                        {% endfor %}
                     </ul>
-                    </nav>
-            </div>
+                </nav>
+                </div>
         </aside>
         <main class="app-main">
             <div class="app-content-header">
                 <div class="container-fluid">
+                    {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
                     <div class="row">
                         <div class="col-sm-6">
                             <h3 class="mb-0">{% block page_title %}{% endblock %}</h3>
@@ -87,16 +112,16 @@
                     {% endblock %}
                 </div>
             </div>
-            </main>
+        </main>
         <footer class="app-footer">
-            <div class="float-end d-none d-sm-inline">Anything you want</div>
+
             <strong>
-                Copyright &copy; 2014-2025&nbsp;
-                <a href="https://adminlte.io" class="text-decoration-none">AdminLTE.io</a>.
+                Copyright &copy; 2025&nbsp;
+                <a href="" class="text-decoration-none">Thainá's English Class</a>.
             </strong>
-            All rights reserved.
+
         </footer>
-        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/browser/overlayscrollbars.browser.es6.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>

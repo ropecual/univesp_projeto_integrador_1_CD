@@ -50,6 +50,13 @@
                     {% endfor %}
                 </div>
             </div>
+            <div class="card-footer text-right">
+                <a href="{% url 'cursos:desinscrever_curso' pk=curso.pk %}" class="btn btn-danger"
+                   onclick="return confirm('Tem certeza que deseja cancelar sua inscrição neste curso?');">
+                    <i class="fas fa-times-circle mr-1"></i>
+                    Cancelar Inscrição
+                </a>
+            </div>
         </div>
     </div>
 </div>
