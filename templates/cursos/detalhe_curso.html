@@ -12,37 +12,39 @@
                 <h3 class="card-title">Módulos do Curso</h3>
             </div>
             <div class="card-body">
-                <div id="accordion">
+                <div class="accordion" id="accordionModulos">
                     {% for modulo in curso.modulos.all %}
-                    <br>
-                    <div class="card card-primary card-outline">
-                        <a class="d-block w-100" data-toggle="collapse" href="#collapse{{ forloop.counter }}">
-                            <div class="card-header">
-                                <h4 class="card-title w-100">
-                                    {{ modulo.titulo }}
-                                </h4>
-                            </div>
-                        </a>
-                        <div id="collapse{{ forloop.counter }}" class="collapse {% if forloop.first %}show{% endif %}"
-                             data-parent="#accordion">
-                            <div class="card-body">
-                                <ul class="list-group list-group-flush">
+                    <div class="accordion-item mb-3">
+                        <h2 class="accordion-header" id="heading{{ forloop.counter }}">
+                            <button class="accordion-button module-toggle-btn {% if not forloop.first %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter }}" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="collapse{{ forloop.counter }}">
+                                {{ modulo.titulo }}
+                            </button>
+                        </h2>
+                        <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" aria-labelledby="heading{{ forloop.counter }}" data-bs-parent="#accordionModulos">
+                            <div class="accordion-body">
+                                <div class="row g-3">
                                     {% for conteudo in modulo.conteudos.all %}
-                                    <li class="list-group-item">
-                                        <a href="{% url 'cursos:visualizar_conteudo' pk=conteudo.pk %}">
-                                            {% if conteudo.tipo == 'video' %}
-                                            <i class="fas fa-play-circle text-danger mr-2"></i>
-                                            {% elif conteudo.tipo == 'pdf' %}
-                                            <i class="fas fa-file-pdf text-info mr-2"></i>
-                                            {% endif %}
-                                            {{ conteudo.titulo }}
+                                    <div class="col-md-4 col-lg-3">
+                                        <a href="{% url 'cursos:visualizar_conteudo' pk=conteudo.pk %}" class="content-card-link">
+                                            <div class="content-card">
+                                                <div class="content-card-icon">
+                                                    {% if conteudo.tipo == 'video' %}
+                                                        <i class="bi bi-play-circle-fill"></i>
+                                                    {% elif conteudo.tipo == 'pdf' %}
+                                                        <i class="bi bi-file-earmark-pdf-fill"></i>
+                                                    {% endif %}
+                                                </div>
+                                                <h5 class="content-card-title">{{ conteudo.titulo }}</h5>
+                                            </div>
                                         </a>
-                                    </li>
+                                    </div>
                                     {% empty %}
-                                    <li class="list-group-item">Nenhum conteúdo neste módulo.</li>
+                                    <div class="col-12">
+                                        <p class="text-muted">Nenhum conteúdo neste módulo ainda.</p>
+                                    </div>
                                     {% endfor %}
-                                </ul>
-                            </div>
+                                </div>
+                                </div>
                         </div>
                     </div>
                     {% empty %}
@@ -50,10 +52,10 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="card-footer text-right">
+            <div class="card-footer text-end">
                 <a href="{% url 'cursos:desinscrever_curso' pk=curso.pk %}" class="btn btn-danger"
                    onclick="return confirm('Tem certeza que deseja cancelar sua inscrição neste curso?');">
-                    <i class="fas fa-times-circle mr-1"></i>
+                    <i class="bi bi-trash3-fill me-1"></i>
                     Cancelar Inscrição
                 </a>
             </div>

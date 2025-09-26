@@ -1,6 +1,8 @@
 # cursos/views.py
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
+
+from .forms import ComentarioForm
 from .models import Curso, Conteudo
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
@@ -49,12 +51,31 @@ def detalhe_curso(request, pk):
 
 
 @login_required
+@login_required
 def visualizar_conteudo(request, pk):
-	conteudo = get_object_or_404(Conteudo, pk=pk)
-	curso_do_conteudo = conteudo.modulo.curso
+    conteudo = get_object_or_404(Conteudo, pk=pk)
+    curso_do_conteudo = conteudo.modulo.curso
 
-	# Verificação de segurança: o aluno tem acesso a este curso?
-	if curso_do_conteudo not in request.user.cursos_inscritos.all():
-		raise Http404("Você não tem permissão para acessar este conteúdo.")
+    if curso_do_conteudo not in request.user.cursos_inscritos.all():
+        raise Http404("Você não tem permissão para acessar este conteúdo.")
 
-	return render(request, 'cursos/visualizar_conteudo.html', {'conteudo': conteudo})
+    # Busca os comentários principais (que não são respostas)
+    comentarios = conteudo.comentarios.filter(resposta_para__isnull=True)
+    form_comentario = ComentarioForm()
+
+    if request.method == 'POST':
+        form_comentario = ComentarioForm(request.POST)
+        if form_comentario.is_valid():
+            novo_comentario = form_comentario.save(commit=False)
+            novo_comentario.conteudo = conteudo
+            novo_comentario.autor = request.user
+            novo_comentario.save()
+            messages.success(request, 'Seu comentário foi enviado com sucesso!')
+            return redirect('cursos:visualizar_conteudo', pk=conteudo.pk)
+
+    context = {
+        'conteudo': conteudo,
+        'comentarios': comentarios,
+        'form_comentario': form_comentario,
+    }
+    return render(request, 'cursos/visualizar_conteudo.html', context)

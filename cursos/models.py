@@ -44,3 +44,19 @@ class Conteudo(models.Model):
 
 	def __str__(self):
 		return self.titulo
+
+
+class Comentario(models.Model):
+	conteudo = models.ForeignKey(Conteudo, on_delete=models.CASCADE, related_name='comentarios')
+	autor = models.ForeignKey(User, on_delete=models.CASCADE)
+	texto = models.TextField()
+	data_criacao = models.DateTimeField(auto_now_add=True)
+
+	# Campo para respostas (comentários aninhados)
+	resposta_para = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='respostas')
+
+	class Meta:
+		ordering = ['data_criacao']  # Ordena os comentários do mais antigo para o mais novo
+
+	def __str__(self):
+		return f'Comentário de {self.autor.first_name} em {self.conteudo.titulo}'

@@ -1,109 +1,153 @@
 /* static/css/cursos_theme.css */
 
-/* Definição das cores principais para fácil reutilização */
+/* Definição das cores principais */
 :root {
-    --theme-dark-bg: #3a2d3c;      /* Fundo principal (roxo escuro) */
-    --theme-sidebar-bg: #2b212d;  /* Fundo da barra lateral (um pouco mais escuro) */
-    --theme-primary: #80304A;     /* Cor primária (vinho) */
-    --theme-accent: #ff85a2;      /* Cor de destaque (rosa) */
-    --theme-text: #f0f0f0;        /* Cor do texto principal */
-    --theme-text-muted: #a0a0a0;  /* Cor do texto secundário */
+    --theme-dark-bg: #3a2d3c;
+    --theme-sidebar-bg: #2b212d;
+    --theme-primary: #80304A;
+    --theme-accent: #ff85a2;
+    --theme-text-light: #f0f0f0;
+    --theme-text-dark: #333333;
+    --theme-card-bg: #fdfaf6;
 }
 
 /* --- Estilos Gerais --- */
-body.layout-fixed .app-wrapper {
-    background-color: var(--theme-dark-bg);
-}
-
-.app-main, .app-content-header, .app-content {
-    background-color: transparent;
-    color: var(--theme-text);
+/* Aumentando a especificidade para garantir a aplicação */
+body.layout-fixed .app-wrapper,
+.app-main,
+.app-content-header {
+    background-color: var(--theme-dark-bg) !important;
+    color: var(--theme-text-light);
 }
 
 .app-footer {
     background-color: var(--theme-sidebar-bg) !important;
-    color: var(--theme-text-muted);
+    color: var(--theme-text-light);
     border-top: 1px solid var(--theme-primary);
 }
 
 /* --- Barra Superior (Header) --- */
 .app-header {
-    background-color: var(--theme-dark-bg);
     border-bottom: 1px solid var(--theme-primary);
-}
 
-.app-header .nav-link {
-    color: var(--theme-text);
 }
+.app-header .nav-link { color: var(--theme-text-light); }
 
 /* --- Barra Lateral (Sidebar) --- */
-.app-sidebar {
+.app-sidebar, .app-sidebar a.brand-link {
     background-color: var(--theme-sidebar-bg) !important;
 }
-
-.sidebar-brand .brand-link {
-    border-bottom: 1px solid var(--theme-primary);
-}
-
-.sidebar-menu .nav-link {
-    color: var(--theme-text-muted);
-}
-
-.sidebar-menu .nav-link:hover {
-    background-color: var(--theme-primary);
-    color: white;
-}
-
-.sidebar-menu .nav-link.active {
-    background-color: var(--theme-accent);
-    color: white;
-    font-weight: bold;
-}
-
-.nav-header {
-    color: var(--theme-accent) !important;
-    font-weight: bold;
-}
-
-#dropdownUser {
-    color: black !important;
-    font-weight: bold;
-}
+.sidebar-brand .brand-link { border-bottom: 1px solid var(--theme-primary); }
+.sidebar-menu .nav-link { color: #a0a0a0; }
+.sidebar-menu .nav-link:hover { background-color: var(--theme-primary); color: white; }
+.sidebar-menu .nav-link.active { background-color: var(--theme-accent); color: white; font-weight: bold; }
+.nav-header { color: var(--theme-accent) !important; font-weight: bold; }
 
 /* --- Cards --- */
-.card {
-    background-color: #4a3c4c;
-    border: 1px solid var(--theme-primary);
-    color: var(--theme-text);
+.app-content .card {
+    background-color: var(--theme-card-bg);
+    color: var(--theme-text-dark);
+    border: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
-.card-header {
-    border-bottom: 1px solid var(--theme-primary);
+.app-content .card-header {
+    background-color: transparent;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Remove a borda colorida específica do AdminLTE */
+.card-primary.card-outline {
+    border-top: none;
 }
 
 /* --- Botões --- */
-.btn-primary {
-    background-color: var(--theme-primary);
-    border-color: var(--theme-primary);
-}
-.btn-primary:hover {
-    background-color: #a83b5f; /* Tom de vinho mais claro */
-    border-color: #a83b5f;
-}
-
-.btn-success {
-    background-color: var(--theme-accent);
-    border-color: var(--theme-accent);
-    color: #3a2d3c;
-    font-weight: bold;
-}
-.btn-success:hover {
-    background-color: #ff6b8f; /* Tom de rosa mais claro */
-    border-color: #ff6b8f;
-    color: #3a2d3c;
-}
+.btn-primary { background-color: var(--theme-primary); border-color: var(--theme-primary); }
+.btn-primary:hover { background-color: #a83b5f; border-color: #a83b5f; }
+.btn-success { background-color: var(--theme-accent); border-color: var(--theme-accent); color: var(--theme-dark-bg); font-weight: bold; }
+.btn-success:hover { background-color: #ff6b8f; border-color: #ff6b8f; color: var(--theme-dark-bg); }
 
 /* --- Menu do Usuário --- */
-.user-header {
-    background-color: var(--theme-primary) !important;
+.user-header { background-color: var(--theme-primary) !important; }
+
+/* --- Seção de Comentários --- */
+.post {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+.post:last-of-type { border-bottom: none; margin-bottom: 0; }
+.post .username a { color: var(--theme-primary); font-weight: 600; text-decoration: none; }
+.post .description { color: #888; font-size: 0.85rem; }
+
+
+.app-main {
+    background: white !important;
+
+    .app-content-header {
+        background: white !important;
+        color: var(--theme-primary);
+    }
+}
+.app-header {
+    background: #3A2D3CFF !important;
+
+}
+
+/* --- Estilos para os Cards de Conteúdo (Aulas) --- */
+.content-card-link {
+    text-decoration: none;
+    display: block;
+    height: 100%;
+}
+
+.content-card {
+    background-color: #ffffff;
+    border: 1px solid #e9ecef;
+    border-radius: 0.75rem;
+    padding: 2rem 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    border-color: var(--theme-accent);
+}
+
+.content-card-icon {
+    font-size: 3rem; /* Tamanho grande para o ícone */
+    margin-bottom: 1rem;
+}
+
+.content-card-icon .bi-play-circle-fill { /* Usando Bootstrap Icons */
+    color: var(--theme-primary);
+}
+
+.content-card-icon .bi-file-earmark-pdf-fill { /* Usando Bootstrap Icons */
+    color: #d35400; /* Um tom de laranja para PDFs */
+}
+
+.content-card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--theme-text-dark);
+    margin: 0;
+}
+
+/* Ajustes no botão do Módulo (Accordion) */
+.module-toggle-btn {
+    color: var(--theme-text-dark);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.module-toggle-btn:not(.collapsed) {
+    color: var(--theme-primary);
 }
