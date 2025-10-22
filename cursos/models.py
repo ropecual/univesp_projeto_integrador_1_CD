@@ -9,9 +9,8 @@ class Curso(models.Model):
 	descricao = models.TextField(blank=True)
 	alunos = models.ManyToManyField(User, related_name='cursos_inscritos', blank=True)
 
-
-def __str__(self):
-	return self.titulo
+	def __str__(self):
+		return self.titulo
 
 
 class Modulo(models.Model):
@@ -43,7 +42,7 @@ class Conteudo(models.Model):
 		ordering = ['ordem']
 
 	def __str__(self):
-		return self.titulo
+		return f'{self.modulo.titulo} - {self.titulo}'
 
 
 class Comentario(models.Model):
