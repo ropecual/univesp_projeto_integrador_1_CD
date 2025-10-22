@@ -17,35 +17,44 @@
             <div class="card-body">
 
                 {% if conteudo.tipo == 'video' %}
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" style="height: 80vh; width: 100%;" src="{{ conteudo.url_video }}" allowfullscreen></iframe>
-                    </div>
-                    <p class="mt-3"><strong>Dica:</strong> Se você cadastrar uma URL do YouTube, certifique-se de que ela está no formato "embed". Ex: <code>https://www.youtube.com/embed/CODIGO_DO_VIDEO</code></p>
+                <div class="ratio ratio-16x9">
+                    <iframe src="{{ conteudo.url_video }}" title="{{ conteudo.titulo }}" allowfullscreen></iframe>
+                </div>
+                <p class="mt-3 text-muted"><strong>Dica:</strong> Para vídeos do YouTube, use o formato "embed". Ex: <code>https://www.youtube.com/embed/CODIGO_DO_VIDEO</code></p>
 
                 {% elif conteudo.tipo == 'pdf' %}
-                    <div class="embed-responsive" style="height: 80vh;">
-                        <br><br>
-                        <embed src="{{ conteudo.arquivo_pdf.url }}" type="application/pdf" width="100%" height="100%">
-                        <p>Seu navegador não tem um plugin para PDF. Você pode <a href="{{ conteudo.arquivo_pdf.url }}">clicar aqui para baixar o PDF.</a></p>
-                    </div>
+                <div style="height: 80vh; border: 1px solid #ccc;">
+    <object data="{{ conteudo.arquivo_pdf.url }}"
+            type="application/pdf"
+            width="100%"
+            height="100%">
+        <embed src="{{ conteudo.arquivo_pdf.url }}"
+               type="application/pdf"
+               width="100%"
+               height="100%" />
+        <p>Não foi possível exibir o PDF.
+           <a href="{{ conteudo.arquivo_pdf.url }}" target="_blank">Clique aqui para baixar.</a>
+        </p>
+    </object>
+</div>
 
                 {% else %}
-                    <p>Tipo de conteúdo não suportado.</p>
+                <p>Tipo de conteúdo não suportado.</p>
                 {% endif %}
 
             </div>
             <div class="card-footer">
-                <br><br>
-                <a href="{% url 'cursos:detalhe_curso' pk=conteudo.modulo.curso.pk %}" class="btn btn-outline-secondary">
+                <a href="{% url 'cursos:detalhe_curso' pk=conteudo.modulo.curso.pk %}"
+                   class="btn btn-outline-secondary">
                     <i class="fas fa-arrow-left mr-1"></i>
                     Voltar para os módulos
                 </a>
-                <br>
             </div>
         </div>
     </div>
 </div>
-<div class="row mt-5">
+
+<div class="row mt-4">
     <div class="col-12">
         <div class="card card-primary card-outline">
             <div class="card-header">
@@ -55,7 +64,7 @@
                 </h3>
             </div>
             <div class="card-body">
-                <form method="post">
+                <form method="post" class="mb-4">
                     {% csrf_token %}
                     {{ form_comentario.texto }}
                     <button type="submit" class="btn btn-success mt-2">Enviar Comentário</button>
@@ -73,7 +82,7 @@
                     <p>{{ comentario.texto|linebreaksbr }}</p>
                 </div>
                 {% empty %}
-                <p>Nenhum comentário ainda. Seja o primeiro a postar uma dúvida!</p>
+                <p class="text-muted">Nenhum comentário ainda. Seja o primeiro a postar uma dúvida!</p>
                 {% endfor %}
             </div>
         </div>

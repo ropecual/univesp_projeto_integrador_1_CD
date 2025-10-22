@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 import os
 from pathlib import Path
+# Permitir que PDFs sejam exibidos em iframes
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+# Configuração adicional para servir PDFs corretamente
+import mimetypes
+mimetypes.add_type("application/pdf", ".pdf", True)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +30,17 @@ SECRET_KEY = 'django-insecure-^uar^!z(_d^uxo0y5t_x-5++j)ykm132)fc4^ev(*mnil1)93$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '0.0.0.0',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8080',
+    'http://127.0.0.1:8080',
+	'http://thainaclassrom.com'
+]
 
 # Application definition
 
